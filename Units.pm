@@ -47,7 +47,7 @@ the source code for a complete listing.
 =head1 EXAMPLES
 
     print "5 mm == ", convert(5, 'mm', 'in'), " inches\n";
-    print "72 degrees Farenheit == ", convert(72, 'F', 'C'), " degrees Celsius\n";
+    print "72 degrees Fahrenheit == ", convert(72, 'F', 'C'), " degrees Celsius\n";
     print "1 gallon == ", convert(1, 'gallon', 'cm^3'), " cubic centimeters\n";
     print "4500 rpm == ", convert(4500, 'rpm', 'Hz'), " Hertz\n";
 
@@ -182,7 +182,7 @@ my %reductions = (
     'gill'   => 'pt/4',     # gills
     'floz'   => 'pt/16',    # fluid ounces
 
-    'Fd' => '1.8 Cd',       # Farenheit degrees (change)
+    'Fd' => '1.8 Cd',       # Fahrenheit degrees (change)
     'Kd' => 'Cd',           # Kelvins (change)
 
     'min' => '60 s',        # minutes
@@ -274,7 +274,8 @@ my @abbreviations = (
     '\bhz\b'           => 'Hz',
 
     '\b[Cc]elsius\b'   => 'C',
-    '\b[Ff]arenheit\b' => 'F',
+    '\b[Ff]arenheit\b' => 'F', # typo since first release
+    '\b[Ff]ahrenheit\b'=> 'F',
     '\b[Kk]elvins?\b'  => 'K',
     '\bdegs?\s+C\b'    => 'C',
     '\bdegs?\s+F\b'    => 'F',
