@@ -1,8 +1,9 @@
 MANIFEST
-README
+README.md
 Changes
 Makefile.PL
 Units.pm
+TODO.md
 examples/convert.pl
 t/00.gunits.t
 t/01.regress.t

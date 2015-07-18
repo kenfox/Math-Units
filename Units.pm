@@ -24,9 +24,9 @@ Math::Units - Unit conversion
 
 =head1 SYNOPSIS
 
-use Math::Units qw(convert);
+    use Math::Units qw(convert);
 
-my $out_value = convert($in_value, 'in unit', 'out unit');
+    my $out_value = convert($in_value, 'in unit', 'out unit');
 
 =head1 DESCRIPTION
 
@@ -44,41 +44,12 @@ conversions can be performed very quickly.
 Too many units, prefixes and abbreviations are supported to list here.  See
 the source code for a complete listing.
 
-=head1 TODO
-
-I beleive this module has great potential, if you have any ideas or patches feel free to submit them to rt.cpan.org.
-
-'units' program test like 'gunits'
-
-other tests
-
-POD about what units/abbr/etc can be used with the function 
-
-general cleanup
-
-Mr. Fox's original TODO:
-
-1. There should be a set of routines for adding new unit formulas,
-   reductions and conversions.
-
-2. Some conversions can be automatically generated from a reduction.  (This
-   has to be done carefully because conversions are bi-directional while
-   reductions *must* be consistently uni-directional.)
-
-3. It would be nice to simplify the default conversions using the
-   yet-to-be-written solution to #2.
-
-4. There are many units (several in the GNU unit program for example) that
-   aren't defined here.  Since I was (un)fortunately born in the U.S., I
-   have a(n) (in)correct belief of what the standard units are.  Please let
-   me know if I've messed anything up!
-
 =head1 EXAMPLES
 
-print "5 mm == ", convert(5, 'mm', 'in'), " inches\n";
-print "72 degrees Farenheit == ", convert(72, 'F', 'C'), " degrees Celsius\n";
-print "1 gallon == ", convert(1, 'gallon', 'cm^3'), " cubic centimeters\n";
-print "4500 rpm == ", convert(4500, 'rpm', 'Hz'), " Hertz\n";
+    print "5 mm == ", convert(5, 'mm', 'in'), " inches\n";
+    print "72 degrees Farenheit == ", convert(72, 'F', 'C'), " degrees Celsius\n";
+    print "1 gallon == ", convert(1, 'gallon', 'cm^3'), " cubic centimeters\n";
+    print "4500 rpm == ", convert(4500, 'rpm', 'Hz'), " Hertz\n";
 
 =cut
 
