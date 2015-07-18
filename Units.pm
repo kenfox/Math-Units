@@ -918,7 +918,7 @@ sub compute_base_factors {
 
 sub print_conversion {
     my ( $value, $u1, $u2 ) = @_;
-    my $my_result = Convert( $value, $u1, $u2 );
+    my $my_result = convert( $value, $u1, $u2 );
 
     print "$value $u1 == $my_result $u2\n";
     $my_result;
