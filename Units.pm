@@ -10,8 +10,7 @@ package Math::Units;
 #    later version, or
 #
 # b) the "Artistic License," the text of which is distributed with
-#    Perl 5.  If you need a copy of this license, please write to
-#    me at <fox@vulpes.com> and I will be happy to send one.
+#    this code in the "LICENSE" file.
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
