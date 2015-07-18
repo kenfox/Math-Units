@@ -1,0 +1,14 @@
+1. There should be a set of routines for adding new unit formulas,
+   reductions and conversions.
+
+2. Some conversions can be automatically generated from a reduction.  (This
+   has to be done carefully because conversions are bi-directional while
+   reductions *must* be consistently uni-directional.)
+
+3. It would be nice to simplify the default conversions using the
+   yet-to-be-written solution to #2.
+
+4. There are many units (several in the GNU unit program for example) that
+   aren't defined here.  Since I was (un)fortunately born in the U.S., I
+   have a(n) (in)correct belief of what the standard units are.  Please let
+   me know if I've messed anything up!
