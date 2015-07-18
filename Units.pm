@@ -162,6 +162,8 @@ my %formulas = (
     'tesla'   => 'Wb/m^2',
     'Hz'      => 'cycle/s',              # hertz
 
+    'thou'    => 'm-in',                 # milli-inches or mils
+
     'lbf'  => 'lb gee',                  # pounds of force
     'tonf' => 'ton gee',                 # tons of force
 
