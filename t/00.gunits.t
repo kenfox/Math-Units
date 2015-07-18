@@ -4,7 +4,7 @@ use strict;
 use Test::More;
 use Math::Units;
 
-system 'gunits', '-v';
+system 'gunits', '--version';
 plan 'skip_all' => 'gunits program required for these tests' if $? == -1;
 plan 'no_plan';
 
@@ -13,9 +13,6 @@ sub test_conversion_against_gunits {
 
     my $my_result = Math::Units::convert( $value, $u1, $u2 );
     my $rounded_result = sprintf( "%.10g", $my_result );
-
-    diag "*** CONVERTED $value '$u1' to $my_result '$u2' ($rounded_result)\n";
-    diag "    '$value\@$u1\@$u2' => $rounded_result, #--R--\n";
 
     my $gunits_output = `gunits --output-format %.10g --silent '$value $u1' '$u2'`;
 
@@ -50,18 +47,12 @@ for ( 1 .. 3 ) {
     doit( 50,   "N",    "lbf" );
     doit( 9990, "N",    "tonf" );
 
-    doit( 2000, "rpm", "Hz" );
-    doit( 2000, "rpm", "cycle/min" );
-    doit( 2000, "rpm", "deg/sec" );
-
     doit( 87,    "jerk", "N/kg sec" );
     doit( 123,   'jerk', 'N/kg sec' );
     doit( 12000, 'jerk', 'lbf/ton sec' );
 
     doit( 123,   "meters per second per second", "yd/s/s" );
     doit( 123,   "5^2/m^2",                      "25 m^-1/m" );
-    doit( 220,   "K",                            "F" );
-    doit( 20,    "C",                            "F" );
     doit( 2,     "Cd",                           "Fd" );
     doit( 1,     "m/Cd",                         "in/Fd" );
     doit( 1,     "m",                            "in" );
@@ -80,7 +71,6 @@ for ( 1 .. 3 ) {
     doit( 167,   "N",                            "lbf" );
     doit( 278,   "N^2",                          "lbf^2" );
     doit( 1,     "25 barrel^2",                  "floz^2" );
-    doit( 0.1,   "F^-1",                         "C^-1" );
     doit( 1,     "m s^-1",                       "ft s^-1" );
     doit( 1,     "l",                            "qt" );
     doit( 1,     "m^3",                          "gal" );
@@ -95,9 +85,9 @@ for ( 1 .. 3 ) {
     doit( 5e12,  "angstroms",                    "in" );
     doit( 9000,  "Hz",                           "kHz" );
     doit( 1,     "gal",                          "in^3" );
-    doit( 10,    "gal",                          "pnt^3" );
-    doit( 100,   "pnt^2",                        "mm^2" );
-    doit( 9e9,   "pnt",                          "km" );
+    doit( 10,    "gal",                          "point^3" );
+    doit( 100,   "point^2",                      "mm^2" );
+    doit( 9e9,   "point",                        "km" );
     doit( 100,   "ft",                           "m" );
     doit( 100,   "km/hr",                        "mi/hr" );
     doit( 100,   "ft/sec",                       "ft/min" );
@@ -106,14 +96,8 @@ for ( 1 .. 3 ) {
     doit( 100,   "ft/sec",                       "m/sec" );
     doit( 1,     "N^2",                          "g^2 km^2/s^4" );
     doit( 17,    "N",                            "lb in/s^2" );
-    doit( 212,   "F",                            "C" );
-    doit( 32,    "F",                            "C" );
-    doit( 70,    "F",                            "C" );
-    doit( 98.6,  "F",                            "C" );
     doit( 1e20,  "cubic microns",                "cubic inches" );
-    doit( 980,   "microns",                      "milliinches" );
-    doit( 9700,  "microns",                      "milli-inches" );
-    doit( 8976,  "microns",                      "m-in" );
+    doit( 980,   "microns",                      "thou" );
     doit( 4500,  "cc",                           "l" );
     doit( 500,   "in^3",                         "l" );
     doit( 500,   "in^3",                         "qt" );
@@ -142,3 +126,33 @@ for my $exp ( 1 .. 4 ) {
         }
     }
 }
+
+# GNU units 2.02 handles these differently than I expect.
+
+# 2000 rpm should be 33.3 Hz. It was producing 209.43951
+# which I don't understand and haven't debugged yet.
+
+# doit( 2000, "rpm", "Hz" );
+# doit( 2000, "rpm", "cycle/min" );
+# doit( 2000, "rpm", "deg/sec" );
+
+# Temperature unit syntax has changed in GNU units 2 and
+# there needs to be special support for these tests.
+
+# doit( 220,   "K",                            "F" );
+# doit( 20,    "C",                            "F" );
+# doit( 0.1,   "F^-1",                         "C^-1" );
+# doit( 212,   "F",                            "C" );
+# doit( 32,    "F",                            "C" );
+# doit( 70,    "F",                            "C" );
+# doit( 98.6,  "F",                            "C" );
+
+# Milli-inches is a really weird name for a common shop unit
+# more commonly called mils or thous. GNU unit seems to have
+# dropped support. I changed the test to use 'thou' but there
+# was no point in having all 3 of these tests since they were
+# testing the weird syntax variations of milli-inches.
+
+# doit( 980,   "microns",                      "milliinches" );
+# doit( 9700,  "microns",                      "milli-inches" );
+# doit( 8976,  "microns",                      "m-in" );
