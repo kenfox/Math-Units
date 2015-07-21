@@ -44,6 +44,23 @@ conversions can be performed very quickly.
 Too many units, prefixes and abbreviations are supported to list here.  See
 the source code for a complete listing.
 
+=head1 SUBROUTINES
+
+=head2 convert
+
+The C<convert> function requires 3 inputs:
+
+    - a numeric input value
+    - an input unit string
+    - an output unit string
+
+The function returns a numeric value.
+
+=head2 print_conversion
+
+The C<print_conversion> function requires the same 3 inputs as C<convert>,
+and it prints the result to STDOUT.
+
 =head1 EXAMPLES
 
     print "5 mm == ", convert(5, 'mm', 'in'), " inches\n";
@@ -51,8 +68,18 @@ the source code for a complete listing.
     print "1 gallon == ", convert(1, 'gallon', 'cm^3'), " cubic centimeters\n";
     print "4500 rpm == ", convert(4500, 'rpm', 'Hz'), " Hertz\n";
 
+=head1 EXPORT
+
+Nothing is exported by default.
+
+=head1 DIAGNOSTICS
+
+Error conditions cause the program to die using C<croak> from the
+L<Carp|Carp> Core module.
+
 =cut
 
+use warnings;
 use strict;
 use vars qw($VERSION @ISA @EXPORT_OK);
 
@@ -441,33 +468,6 @@ sub register_factor {
 
     $factor{$u1}{$u2} = $f;
     $factor{$u2}{$u1} = 1 / $f if ( ref($f) ne "CODE" );
-}
-
-sub print_unit($\%) {
-    my ( $prefix, $u_group ) = @_;
-    my ( $num_str, $den_str, $u, $dim );
-
-    $num_str = "";
-    $den_str = "";
-
-    while ( ( $u, $dim ) = each %{$u_group} ) {
-        if ( $u eq "1" ) { $prefix *= $dim }
-        elsif ( $dim > 1 )   { $num_str .= "$u^$dim " }
-        elsif ( $dim == 1 )  { $num_str .= "$u " }
-        elsif ( $dim == -1 ) { $den_str .= "$u " }
-        elsif ( $dim < -1 ) { $den_str .= join( "", $u, "^", -$dim, " " ) }
-    }
-
-    $num_str .= "$prefix " if ( $prefix != 1 );
-
-    chop $num_str;
-    chop $den_str;
-
-    $num_str = "1" if ( !$num_str );
-
-    print $num_str;
-    print "/", $den_str if ($den_str);
-    print "\n";
 }
 
 my $current_prefix;
