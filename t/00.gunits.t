@@ -5,7 +5,7 @@ use Test::More;
 use Math::Units;
 
 system 'gunits', '--version';
-plan 'skip_all' => 'gunits program required for these tests' if $? == -1;
+plan 'skip_all' => 'gunits program required for these tests' if $? == -1 || $? == 256;
 plan 'no_plan';
 
 sub test_conversion_against_gunits {
