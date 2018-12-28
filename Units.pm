@@ -105,6 +105,7 @@ my %prefixes = (
 
 my %formulas = (
     'are'     => '100 m^2',              # as in hectare
+    'ac'      => '43560 ft^2',           # ac as in acre
     'l'       => 'm^3/1000',             # liter
     'tonne'   => '1000 kg',              # metric ton
     'N'       => 'kg m/s^2',             # newton
@@ -293,6 +294,8 @@ my @abbreviations = (
     '\bangstroms?\b' => 'dn,m',
     '\bcc\b'         => 'cm^3',
     '\bhectares?\b'  => 'h,are',
+    '\bha\b'         => 'h,are',
+    '\bacres?\b'     => 'ac',
     '\bmils?\b'      => 'm,in',
     'amperes?\b'     => 'A',
     'amps?\b'        => 'A',
